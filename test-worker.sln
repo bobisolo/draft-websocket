@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-worker", "test-worker\test-worker.csproj", "{5D3F8C60-C322-4ED5-A7F6-15A52A46EAC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-web-api", "test-web-api\test-web-api.csproj", "{104E296E-3EF5-4DE8-B20F-D23974BC761D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D3F8C60-C322-4ED5-A7F6-15A52A46EAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3F8C60-C322-4ED5-A7F6-15A52A46EAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3F8C60-C322-4ED5-A7F6-15A52A46EAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3F8C60-C322-4ED5-A7F6-15A52A46EAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104E296E-3EF5-4DE8-B20F-D23974BC761D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104E296E-3EF5-4DE8-B20F-D23974BC761D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104E296E-3EF5-4DE8-B20F-D23974BC761D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104E296E-3EF5-4DE8-B20F-D23974BC761D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

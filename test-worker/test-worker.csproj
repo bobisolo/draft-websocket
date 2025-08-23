@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-test_worker-6a0c8157-11ba-4189-a7e3-5f8ca7d12230</UserSecretsId>
+        <RootNamespace>test_worker</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8"/>
+        <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.8" />
+    </ItemGroup>
+</Project>
