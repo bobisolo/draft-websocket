@@ -1,0 +1,143 @@
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <QuickGrid Class="relative min-w-full divide-y divide-gray-300 dark:divide-white/15" Items="@people" Pagination="@paginationState">
+                <TemplateColumn SortBy="@(new SortBy<Person> { Property = p => p.Name })">
+                    <HeaderTemplate>
+                        <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3 dark:text-white">Name</th>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-3 dark:text-white">@person.Name</td>
+                    </ChildContent>
+                </TemplateColumn>
+
+                <TemplateColumn SortBy="@(new SortBy<Person> { Property = p => p.Title })">
+                    <HeaderTemplate>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Title</th>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">@person.Title</td>
+                    </ChildContent>
+                </TemplateColumn>
+
+                <TemplateColumn SortBy="@(new SortBy<Person> { Property = p => p.Email })">
+                    <HeaderTemplate>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Email</th>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">@person.Email</td>
+                    </ChildContent>
+                </TemplateColumn>
+
+                <TemplateColumn SortBy="@(new SortBy<Person> { Property = p => p.Role })">
+                    <HeaderTemplate>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">Role</th>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">@person.Role</td>
+                    </ChildContent>
+                </TemplateColumn>
+
+                <TemplateColumn>
+                    <HeaderTemplate>
+                        <th scope="col" class="py-3.5 pr-4 pl-3 sm:pr-3">
+                            <span class="sr-only">Edit</span>
+                        </th>
+                    </HeaderTemplate>
+                    <ChildContent Context="person">
+                        <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">Edit<span class="sr-only">, @person.Name</span></a>
+                        </td>
+                    </ChildContent>
+                </TemplateColumn>
+
+                <Pagination>
+                    <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+                        <div class="-mt-px flex w-0 flex-1">
+                            <button class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700" 
+                                    disabled="@(!paginationState.CanPageBackward)" 
+                                    @onclick="() => paginationState.CurrentPageIndex--">
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mr-3 size-5 text-gray-400">
+                                    <path d="M18 10a.75.75 0 0 1-.75.75H4.66l2.1 1.95a.75.75 0 1 1-1.02 1.1l-3.5-3.25a.75.75 0 0 1 0-1.1l3.5-3.25a.75.75 0 1 1 1.02 1.1l-2.1 1.95h12.59A.75.75 0 0 1 18 10Z" clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                                Previous
+                            </button>
+                        </div>
+                        <div class="hidden md:-mt-px md:flex">
+                            @for (int i = 0; i < paginationState.TotalPages; i++)
+                            {
+                                int pageIndex = i; // Capture loop variable for use in lambda
+                                bool isCurrent = pageIndex == paginationState.CurrentPageIndex;
+                                <button class="inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium @(isCurrent ? "border-indigo-500 text-indigo-600" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700")"
+                                        @onclick="() => paginationState.CurrentPageIndex = pageIndex">
+                                    @(pageIndex + 1)
+                                </button>
+                            }
+                            @if (paginationState.TotalPages > 5)
+                            {
+                                <span class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">...</span>
+                            }
+                        </div>
+                        <div class="-mt-px flex w-0 flex-1 justify-end">
+                            <button class="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                    disabled="@(!paginationState.CanPageForward)"
+                                    @onclick="() => paginationState.CurrentPageIndex++">
+                                Next
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="ml-3 size-5 text-gray-400">
+                                    <path d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z" clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </nav>
+                </Pagination>
+            </QuickGrid>
+        </div>
+    </div>
+</div>
+
+@code {
+    public class Person
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Title { get; set; }
+        public string Role { get; set; }
+    }
+
+    private readonly PaginationState paginationState = new() { ItemsPerPage = 2 }; // Set items per page to 2 for demonstration
+
+    private IQueryable<Person> people = new List<Person>
+    {
+        new Person
+        {
+            Name = "Lindsay Walton",
+            Email = "lindsay.walton@example.com",
+            Title = "Front-end Developer",
+            Role = "Member"
+        },
+        new Person
+        {
+            Name = "Courtney Henry",
+            Email = "courtney.henry@example.com",
+            Title = "Designer",
+            Role = "Admin"
+        },
+        // Add more items to demonstrate pagination
+        new Person
+        {
+            Name = "Tom Cook",
+            Email = "tom.cook@example.com",
+            Title = "Backend Developer",
+            Role = "Member"
+        },
+        new Person
+        {
+            Name = "Sarah Johnson",
+            Email = "sarah.johnson@example.com",
+            Title = "Product Manager",
+            Role = "Admin"
+        }
+    }.AsQueryable();
+}
